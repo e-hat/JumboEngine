@@ -1,0 +1,9 @@
+[submodule "JumboEngine/vendor/spdlog"]
+	path = JumboEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "JumboEngine/vendor/GLFW"]
+	path = JumboEngine/vendor/GLFW
+	url = https://github.com/TheCherno/glfw
+[submodule "JumboEngine/vendor/imgui"]
+	path = JumboEngine/vendor/imgui
+	url = https://github.com/TheCherno/imgui
