@@ -3,6 +3,8 @@
 workspace "JumboEngine"
  architecture "x64"
 
+ startproject "Sandbox"
+
  configurations
  {
   "Debug",
@@ -17,16 +19,17 @@ workspace "JumboEngine"
  IncludeDir["Glad"] = "JumboEngine/vendor/Glad/include"
  IncludeDir["ImGui"] = "JumboEngine/vendor/imgui"
 
+ group "Dependencies"
+	include "JumboEngine/vendor/GLFW"
+	include "JumboEngine/vendor/Glad"
+	include "JumboEngine/vendor/imgui"
+group ""
 
- include "JumboEngine/vendor/GLFW"
- include "JumboEngine/vendor/Glad"
- include "JumboEngine/vendor/imgui"
-
- 
  project "JumboEngine"
  location "JumboEngine"
  kind "SharedLib"
  language "C++"
+ staticruntime "off"
 
  targetdir ("bin/" .. outputdir .. "/%{prj.name}")
  objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -73,28 +76,29 @@ workspace "JumboEngine"
 
   postbuildcommands
   {
-   ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+   ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
   }
 
  filter "configurations:Debug"
   defines "JB_DEBUG"
-  buildoptions "/MDd"
+  runtime "Debug"
   symbols "On"
 
  filter "configurations:Release"
   defines "JB_RELEASE"
-  buildoptions "/MD"
+  runtime "Release"
   optimize "On"
 
  filter "configurations:Dist"
   defines "JB_DIST"
-  buildoptions "/MD"
+  runtime "Release"
   optimize "On"
 
 project "Sandbox"
  location "Sandbox"
  kind "ConsoleApp"
  language "C++"
+ staticruntime "off"
 
  targetdir ("bin/" .. outputdir .. "/%{prj.name}")
  objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -128,15 +132,15 @@ project "Sandbox"
 
  filter "configurations:Debug"
   defines "JB_DEBUG"
-  buildoptions "/MDd"
+  runtime "Debug"
   symbols "On"
 
  filter "configurations:Release"
   defines "JB_RELEASE"
-  buildoptions "/MD"
+  runtime "Release"
   optimize "On"
 
  filter "configurations:Dist"
   defines "JB_DIST"
-  buildoptions "/MD"
+  runtime "Release"
   optimize "On"

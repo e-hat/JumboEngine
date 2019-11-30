@@ -19,6 +19,7 @@ namespace Jumbo
 
 		void OnUpdate();
 		void OnEvent(Event& event);
+
 	private:
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& event);
 		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& event);
