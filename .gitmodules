@@ -7,3 +7,6 @@
 [submodule "JumboEngine/vendor/imgui"]
 	path = JumboEngine/vendor/imgui
 	url = https://github.com/TheCherno/imgui
+[submodule "JumboEngine/vendor/glm"]
+	path = JumboEngine/vendor/glm
+	url = https://github.com/g-truc/glm

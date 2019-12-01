@@ -1,146 +1,143 @@
 
-
 workspace "JumboEngine"
- architecture "x64"
+	architecture "x64"
 
- startproject "Sandbox"
+	startproject "Sandbox"
 
- configurations
- {
-  "Debug",
-  "Release",
-  "Dist"
- }
+	configurations
+	{
+	  "Debug",
+	  "Release",
+	  "Dist"
+	 }
 
- outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+	 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
- IncludeDir = {}
- IncludeDir["GLFW"] = "JumboEngine/vendor/GLFW/include"
- IncludeDir["Glad"] = "JumboEngine/vendor/Glad/include"
- IncludeDir["ImGui"] = "JumboEngine/vendor/imgui"
-
- group "Dependencies"
-	include "JumboEngine/vendor/GLFW"
-	include "JumboEngine/vendor/Glad"
-	include "JumboEngine/vendor/imgui"
-group ""
-
- project "JumboEngine"
- location "JumboEngine"
- kind "SharedLib"
- language "C++"
- staticruntime "off"
-
- targetdir ("bin/" .. outputdir .. "/%{prj.name}")
- objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
- pchheader "jbpch.h"
- pchsource "%{prj.name}/src/jbpch.cpp"
-
- files
- {
-  "%{prj.name}/src/**.h",
-  "%{prj.name}/src/**.cpp"
- }
-
- includedirs
- {
-  "%{prj.name}/src",
-  "%{prj.name}/vendor/spdlog/include",
-  "%{IncludeDir.GLFW}",
-  "%{IncludeDir.Glad}",
-  "%{IncludeDir.ImGui}"
+	 IncludeDir = {}
+	 IncludeDir["GLFW"] = "JumboEngine/vendor/GLFW/include"
+	 IncludeDir["Glad"] = "JumboEngine/vendor/Glad/include"
+	 IncludeDir["ImGui"] = "JumboEngine/vendor/imgui"
+	 IncludeDir["glm"] = "JumboEngine/vendor/glm"
 
 
- }
+	group "Dependencies"
+		include "JumboEngine/vendor/GLFW"
+		include "JumboEngine/vendor/Glad"
+		include "JumboEngine/vendor/imgui"
+	group ""
 
- links
- {
-	"Glad",
-	"GLFW",
-	"ImGui",
-	"opengl32.lib"
- }
+	project "JumboEngine"
+	location "JumboEngine"
+	kind "StaticLib"
+	language "C++"
+	staticruntime "on"
 
- filter "system:windows"
-  cppdialect "C++17"
-  staticruntime "On"
-  systemversion "latest"
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-  defines
-  {
-   "JB_PLATFORM_WINDOWS",
-   "JB_BUILD_DLL",
-   "GLFW_INCLUDE_NONES"
-  }
+	pchheader "jbpch.h"
+	pchsource "%{prj.name}/src/jbpch.cpp"
+	
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
 
-  postbuildcommands
-  {
-   ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-  }
+	includedirs
+	{
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
+   	}
 
- filter "configurations:Debug"
-  defines "JB_DEBUG"
-  runtime "Debug"
-  symbols "On"
+	links
+	{
+		"Glad",
+		"GLFW",
+		"ImGui",
+		"opengl32.lib"
+	}
 
- filter "configurations:Release"
-  defines "JB_RELEASE"
-  runtime "Release"
-  optimize "On"
+	filter "system:windows"
+		cppdialect "C++17"
+		systemversion "latest"
+	
+		defines
+		{
+			"JB_PLATFORM_WINDOWS",
+			"JB_BUILD_DLL",
+			"GLFW_INCLUDE_NONES"
+		}
 
- filter "configurations:Dist"
-  defines "JB_DIST"
-  runtime "Release"
-  optimize "On"
+	filter "configurations:Debug"
+		defines "JB_DEBUG"
+		runtime "Debug"
+		symbols "on"
 
-project "Sandbox"
- location "Sandbox"
- kind "ConsoleApp"
- language "C++"
- staticruntime "off"
+	filter "configurations:Release"
+		defines "JB_RELEASE"
+		runtime "Release"
+		optimize "on"
 
- targetdir ("bin/" .. outputdir .. "/%{prj.name}")
- objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	filter "configurations:Dist"
+		defines "JB_DIST"
+		runtime "Release"
+		optimize "on"
 
- files
- {
-  "%{prj.name}/src/**.h",
-  "%{prj.name}/src/**.cpp"
- }
+	project "Sandbox"
+		location "Sandbox"
+		kind "ConsoleApp"
+		language "C++"
+		staticruntime "on""
 
- includedirs
- {
-  "JumboEngine/vendor/spdlog/include",
-  "JumboEngine/src"
- }
+		targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+		objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
- links
- {
-  "JumboEngine"
- }
+		files
+		{
+			"%{prj.name}/src/**.h",
+			"%{prj.name}/src/**.cpp"
+		}
 
- filter "system:windows"
-  cppdialect "C++17"
-  staticruntime "On"
-  systemversion "latest"
+		includedirs
+		{
+			"JumboEngine/vendor/spdlog/include",
+			"JumboEngine/src",
+			"%{IncludeDir.glm}",
+			"%{IncludeDir.ImGui}"
+		}
 
-  defines
-  {
-   "JB_PLATFORM_WINDOWS"
-  }
+		links
+		{
+			"JumboEngine"
+		}
 
- filter "configurations:Debug"
-  defines "JB_DEBUG"
-  runtime "Debug"
-  symbols "On"
+		filter "system:windows"
+			cppdialect "C++17"
+			systemversion "latest"
 
- filter "configurations:Release"
-  defines "JB_RELEASE"
-  runtime "Release"
-  optimize "On"
+			defines
+			{
+				"JB_PLATFORM_WINDOWS"
+			}
 
- filter "configurations:Dist"
-  defines "JB_DIST"
-  runtime "Release"
-  optimize "On"
+		filter "configurations:Debug"
+			defines "JB_DEBUG"
+			runtime "Debug"
+			symbols "on"
+
+		filter "configurations:Release"
+			defines "JB_RELEASE"
+			runtime "Release"
+			optimize "on"
+
+		filter "configurations:Dist"
+			defines "JB_DIST"
+			runtime "Release"
+			optimize "on"

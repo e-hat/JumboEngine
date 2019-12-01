@@ -1,5 +1,7 @@
 #include <Jumbo.h>
 
+#include <imgui.h>
+
 class ExampleLayer : public Jumbo::Layer
 {
 public:
@@ -7,14 +9,21 @@ public:
 	{
 	}
 
-	void OnUpdate() override
+	virtual void OnUpdate() override
 	{
-		JB_INFO("ExampleLayer::Update");
+		//JB_INFO("ExampleLayer::Update");
 	}
 
-	void OnEvent(Jumbo::Event& event) override
+	virtual void OnEvent(Jumbo::Event& event) override
 	{
-		JB_TRACE("{0}", event);
+		//JB_TRACE("{0}", event);
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World!");
+		ImGui::End();
 	}
 };
 
@@ -24,7 +33,6 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Jumbo::ImGuiLayer());
 	}
 
 	~Sandbox()

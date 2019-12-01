@@ -1,14 +1,12 @@
 #include "jbpch.h"
 
 #include "JumboEngine/Application.h"
+#include "Input.h"
 
 #include <glad/glad.h>
 
 namespace Jumbo
 {
-
-
-
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application()
@@ -18,6 +16,9 @@ namespace Jumbo
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(JB_BIND_EVENT_FN(Application::OnEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -38,7 +39,7 @@ namespace Jumbo
 
 	void Application::OnEvent(Event& e)
 	{
-		JB_CORE_TRACE("{0}", e);
+		//JB_CORE_TRACE("{0}", e);
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(JB_BIND_EVENT_FN(Application::OnWindowClose));
@@ -60,6 +61,13 @@ namespace Jumbo
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			m_ImGuiLayer->Begin();
+
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+
+			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();
 		}
