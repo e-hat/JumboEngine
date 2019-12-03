@@ -8,7 +8,7 @@
 
 namespace Jumbo
 {
-	class JUMBO_API Log
+	class  Log
 	{
 	public:
 		static void Init();

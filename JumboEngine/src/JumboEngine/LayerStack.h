@@ -7,7 +7,7 @@
 
 namespace Jumbo
 {
-	class JUMBO_API LayerStack
+	class  LayerStack
 	{
 	public:
 		LayerStack();

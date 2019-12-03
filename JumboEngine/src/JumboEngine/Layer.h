@@ -5,7 +5,7 @@
 
 namespace Jumbo
 {
-	class JUMBO_API Layer
+	class  Layer
 	{
 	public:
 		Layer(const std::string& debugName = "Layer");

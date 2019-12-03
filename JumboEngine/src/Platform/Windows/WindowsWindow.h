@@ -1,8 +1,9 @@
 #pragma once
 
 #include "JumboEngine/Window.h"
+#include "JumboEngine/Renderer/GraphicsContext.h"
 
-struct GLFWwindow;
+#include <GLFW/glfw3.h>
 
 namespace Jumbo
 {
@@ -29,6 +30,7 @@ namespace Jumbo
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

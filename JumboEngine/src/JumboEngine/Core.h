@@ -1,14 +1,18 @@
 #pragma once
 
 #ifdef JB_PLATFORM_WINDOWS
+#if HZ_DYNAMIC_LINK
 	#ifdef JB_BUILD_DLL
-		#define JUMBO_API __declspec(dllexport)
+		#define  __declspec(dllexport)
 
 	#else
-		#define JUMBO_API __declspec(dllimport)
+		#define  __declspec(dllimport)
 #endif 
 #else 
-#error JumboEngine only supports Windows!
+	#define JUMBO_API
+#endif
+#else
+	#error JumboEngine only supports Windows!
 #endif
 
 #ifdef JB_DEBUG

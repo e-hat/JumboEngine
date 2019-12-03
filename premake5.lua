@@ -9,15 +9,15 @@ workspace "JumboEngine"
 	  "Debug",
 	  "Release",
 	  "Dist"
-	 }
+	}
 
-	 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-	 IncludeDir = {}
-	 IncludeDir["GLFW"] = "JumboEngine/vendor/GLFW/include"
-	 IncludeDir["Glad"] = "JumboEngine/vendor/Glad/include"
-	 IncludeDir["ImGui"] = "JumboEngine/vendor/imgui"
-	 IncludeDir["glm"] = "JumboEngine/vendor/glm"
+	IncludeDir = {}
+	IncludeDir["GLFW"] = "JumboEngine/vendor/GLFW/include"
+	IncludeDir["Glad"] = "JumboEngine/vendor/Glad/include"
+	IncludeDir["ImGui"] = "JumboEngine/vendor/imgui"
+	IncludeDir["glm"] = "JumboEngine/vendor/glm"
 
 
 	group "Dependencies"
@@ -44,6 +44,11 @@ workspace "JumboEngine"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -94,7 +99,7 @@ workspace "JumboEngine"
 		location "Sandbox"
 		kind "ConsoleApp"
 		language "C++"
-		staticruntime "on""
+		staticruntime "on"
 
 		targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 		objdir ("bin-int/" .. outputdir .. "/%{prj.name}")

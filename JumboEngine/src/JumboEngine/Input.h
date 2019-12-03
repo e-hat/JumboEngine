@@ -5,7 +5,7 @@
 namespace Jumbo
 {
 
-	class JUMBO_API Input
+	class  Input
 	{
 	public:
 		inline static bool IsKeyPressed(int keycode)
