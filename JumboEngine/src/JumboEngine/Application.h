@@ -9,6 +9,8 @@
 
 #include "JumboEngine/ImGui/ImGuiLayer.h"
 
+#include "JumboEngine/Renderer/Shader.h"
+
 namespace Jumbo
 {
 
@@ -37,6 +39,7 @@ namespace Jumbo
 		LayerStack m_LayerStack;
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 
 	private:
 		static Application* s_Instance;

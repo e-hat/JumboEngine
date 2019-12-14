@@ -13,8 +13,14 @@
     <Filter Include="src\JumboEngine\ImGui">
       <UniqueIdentifier>{19E788AE-8553-44A9-4E47-DC06BA726611}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\JumboEngine\Renderer">
+      <UniqueIdentifier>{35238540-2148-D4C0-4A93-B9503617D3DE}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
@@ -87,8 +93,14 @@
     <ClInclude Include="src\JumboEngine\MouseButtonCodes.h">
       <Filter>src\JumboEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\JumboEngine\Renderer\GraphicsContext.h">
+      <Filter>src\JumboEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\JumboEngine\Window.h">
       <Filter>src\JumboEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>src\Platform\Windows</Filter>
@@ -1203,8 +1215,6 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\JumboEngine\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\JumboEngine\Application.cpp">
@@ -1225,6 +1235,9 @@
     <ClCompile Include="src\JumboEngine\Log.cpp">
       <Filter>src\JumboEngine</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
@@ -1234,6 +1247,5 @@
     <ClCompile Include="src\jbpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
   </ItemGroup>
 </Project>
