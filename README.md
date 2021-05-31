@@ -1,2 +1,2 @@
 # JumboEngine
-Game engine based on series by The Cherno on YouTube.
+Game engine based on series by The Cherno on YouTube. This has been discontinued because I realized that I was more interested in purely the graphics side of game programming. I used it as a semi-template for [efgl](https://github.com/e-hat/efgl), which is the graphics engine I've been working on for a while. I learned a lot about structuring a project from this though, so it was by no means a waste of time. 
